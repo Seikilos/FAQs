@@ -3,7 +3,7 @@ Error handling
 
 Use trap command to catch all exceptions (https://technet.microsoft.com/en-us/library/hh847742.aspx)
 
-Example: (Place anywhere):
+Example: (Place on top):
 
 ```powershell
 $ErrorActionPreference = "stop"
@@ -15,6 +15,8 @@ trap [Exception] {
 ```
 
 Read below for explanation of ```$ErrorActionPreference```
+
+*Note*: The trap command can be placed anywhere but ```$ErrorActionPreference``` should be placed as early as possible.
 
 **Important on Syntax Errors and Invalid Arguments**
 
