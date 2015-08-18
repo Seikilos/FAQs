@@ -9,7 +9,7 @@ Example: (Place on top):
 $ErrorActionPreference = "stop"
 trap [Exception] {
     echo "Trap encountered. Exiting with 1. See errors below"
-    echo $_
+    Write-Error $_
     exit 1
 }
 ```
