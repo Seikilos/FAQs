@@ -38,6 +38,12 @@ Working alternative -> Set gflags to `gflags.exe /i app.exe +ust` (enables user 
 
 ***Important: Remember to reset gflags  to -ust***
 
+Application crashes only when debugger is not attached
+=========
+See http://stackoverflow.com/questions/811951/mt-and-md-builds-crashing-but-only-when-debugger-isnt-attached-how-to-debug and http://stackoverflow.com/questions/1060337/why-does-my-stl-code-run-so-slowly-when-i-have-the-debugger-ide-attached/1060929#1060929
+Probably the debugger heap causes different behaviour
+Add `_NO_DEBUG_HEAP=1` to project's properties environment
+
 Fallback
 =========
 WinDbg and MemComparer (https://github.com/Seikilos/MemComparer) for Managed Leaks
