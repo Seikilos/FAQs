@@ -53,6 +53,8 @@ Especially http://stackoverflow.com/questions/1010106/how-to-debug-heap-corrupti
 
 Also: Enable Page Heap for application in gflags and attach debugger.
 
+Explanation of Windows Heap Management http://blogs.msdn.com/b/jiangyue/archive/2010/03/16/windows-heap-overrun-monitoring.aspx
+
 Fallback
 =========
 WinDbg and MemComparer (https://github.com/Seikilos/MemComparer) for Managed Leaks
