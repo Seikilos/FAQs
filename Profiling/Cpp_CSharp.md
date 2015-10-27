@@ -43,7 +43,9 @@ Application crashes only when debugger is not attached
 See http://stackoverflow.com/questions/811951/mt-and-md-builds-crashing-but-only-when-debugger-isnt-attached-how-to-debug and http://stackoverflow.com/questions/1060337/why-does-my-stl-code-run-so-slowly-when-i-have-the-debugger-ide-attached/1060929#1060929
 
 Probably the debugger heap causes different behaviour
-Add `_NO_DEBUG_HEAP=1` to project's properties environment
+Add `_NO_DEBUG_HEAP=1` to project's properties environment (See Heap corruption for more)
+
+When debugger is attached from the beginning, the heap layout of the debug heap is different. Debug heap introduces padding and heap extra space (see article below) in which checks do not occur. So with debug heap a previous crash (heap corruption in a heap header) might be now in padding of a heap which is not checked by the heap manager.
 
 Heap corruption in native processes
 =========
@@ -53,7 +55,7 @@ Especially http://stackoverflow.com/questions/1010106/how-to-debug-heap-corrupti
 
 Also: Enable Page Heap for application in gflags and attach debugger.
 
-Explanation of Windows Heap Management http://blogs.msdn.com/b/jiangyue/archive/2010/03/16/windows-heap-overrun-monitoring.aspx
+**Explanation of Windows Heap Management** http://blogs.msdn.com/b/jiangyue/archive/2010/03/16/windows-heap-overrun-monitoring.aspx
 
 Fallback
 =========
