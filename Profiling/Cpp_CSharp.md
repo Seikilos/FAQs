@@ -57,6 +57,29 @@ Also: Enable Page Heap for application in gflags and attach debugger.
 
 **Explanation of Windows Heap Management** http://blogs.msdn.com/b/jiangyue/archive/2010/03/16/windows-heap-overrun-monitoring.aspx
 
+
+Hint: Debug with WinDbg for deeper analysis
+
+Normal Heap
+---------
+Has CRC checks when block is freed. Heap corruption only detected in heap headers, not user data.
+
+Debug Heap
+--------
+Has trailing checking pattern *ab*. Also detects only on freeing blocks but may detect corruption of user data (when in trailing checking pattern. Misses corruption of heap extra area. Debug Heap might hide a crash occuring with normal heap due to offsets in address space)
+
+Page Heap
+--------
+Most detailed debugging with access monitoring during execution.
+
+Enabled via gflags.exe or application verifier. Increases heap massively. Provides inaccessible areas where access to it causes an instant **access violation 0xc0000005!**. Those inaccessible address areas are displayed as **??**. Suffix area overrun still detected only on release (suffix area validation is done on release) and causes a *VERIFIER STOP corrupted suffix pattern* message .
+
+Implicitly enables Heap Stack Trace for heaps
+
+Normal Page Heap
+--------
+Slimmed down version of Page Heap without non-accessible pages. Checks executed only on freeing blocks
+
 Fallback
 =========
 WinDbg and MemComparer (https://github.com/Seikilos/MemComparer) for Managed Leaks
