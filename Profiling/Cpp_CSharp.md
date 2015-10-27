@@ -44,6 +44,12 @@ See http://stackoverflow.com/questions/811951/mt-and-md-builds-crashing-but-only
 Probably the debugger heap causes different behaviour
 Add `_NO_DEBUG_HEAP=1` to project's properties environment
 
+Heap corruption in native processes
+=========
+See http://stackoverflow.com/questions/1010106/how-to-debug-heap-corruption-errors
+Especially http://stackoverflow.com/questions/1010106/how-to-debug-heap-corruption-errors AppVerifier with DebugDiag
+Also: Enable Page Heap for application in gflags and attach debugger.
+
 Fallback
 =========
 WinDbg and MemComparer (https://github.com/Seikilos/MemComparer) for Managed Leaks
