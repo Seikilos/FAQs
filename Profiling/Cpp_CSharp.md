@@ -41,13 +41,16 @@ Working alternative -> Set gflags to `gflags.exe /i app.exe +ust` (enables user 
 Application crashes only when debugger is not attached
 =========
 See http://stackoverflow.com/questions/811951/mt-and-md-builds-crashing-but-only-when-debugger-isnt-attached-how-to-debug and http://stackoverflow.com/questions/1060337/why-does-my-stl-code-run-so-slowly-when-i-have-the-debugger-ide-attached/1060929#1060929
+
 Probably the debugger heap causes different behaviour
 Add `_NO_DEBUG_HEAP=1` to project's properties environment
 
 Heap corruption in native processes
 =========
 See http://stackoverflow.com/questions/1010106/how-to-debug-heap-corruption-errors
+
 Especially http://stackoverflow.com/questions/1010106/how-to-debug-heap-corruption-errors AppVerifier with DebugDiag
+
 Also: Enable Page Heap for application in gflags and attach debugger.
 
 Fallback
