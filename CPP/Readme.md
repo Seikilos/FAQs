@@ -21,3 +21,63 @@ See http://stackoverflow.com/questions/488809/tools-for-inspecting-lib-files
 * Enable/Disable Function decoration
 * Search for function
 * => If not in DLL but in lib, most likey mismatch between lib and dll
+
+
+Display layout of a class
+==============
+Undocumented compiler switches displaying the layout and offset of a class:
+
+```
+/d1reportAllClassLayout
+/d1reportSingleClassLayout<name>
+```
+See http://ofekshilon.com/2010/11/07/d1reportallclasslayout-dumping-object-memory-layout/
+
+```
+class A
+{
+    int m_a, m_b;
+    virtual void cookie() {}
+    virtual void monster() {}
+};
+  
+class B : public A
+{
+    double m_c;
+    virtual void cookie() {}
+};
+```
+
+will be
+```
+class A    size(16):
+    +---
+ 0  | {vfptr}
+ 8  | m_a
+12  | m_b
+    +---
+A::$vftable@:
+    | &A_meta
+    |  0
+ 0  | &A::cookie
+ 1  | &A::monster
+A::cookie this adjustor: 0
+A::monster this adjustor: 0
+ 
+class B    size(24):
+    +---
+    | +--- (base class A)
+ 0  | | {vfptr}
+ 8  | | m_a
+12  | | m_b
+    | +---
+16  | m_c
+    +---
+B::$vftable@:
+    | &B_meta
+    |  0
+ 0  | &B::cookie
+ 1  | &A::monster
+B::cookie this adjustor: 0
+```
+
