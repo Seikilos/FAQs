@@ -85,3 +85,10 @@ B::$vftable@:
 B::cookie this adjustor: 0
 ```
 
+Debugging difference between WinDbg and Visual Studio
+=========
+
+When looking at dlls with missing pdb files, WinDbg's callstack may differe from Visual Studio's one. WinDbg may display function names whereas Visual Studio shows only addresses not able to resolve the name.
+
+The source of that is the dll export table, WinDbg reads the export definition of Dlls and resolve the names (of course only for exported symbols). To have a similar behaviour in Visual Studio, go to `Tools > Options > Debugging > General and select "Load dll exports"`
+
