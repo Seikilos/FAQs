@@ -22,6 +22,10 @@ See http://stackoverflow.com/questions/488809/tools-for-inspecting-lib-files
 * Search for function
 * => If not in DLL but in lib, most likey mismatch between lib and dll
 
+Symbol not found during linker step
+======================
+
+If proper .lib was included, perform `dumpbin` step as above, search for method: If not available, it is not exported, if it is avaialble check the `Machine` entry whether the architecture matches (x64 or x86)
 
 Display layout of a class
 ==============
