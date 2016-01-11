@@ -56,5 +56,5 @@ Set ```$ErrorActionPreference = "stop"``` to ensure errors do not continue and c
 
 *Why using `Write-Output` with overhead instead of `Write-Error`?*
 
-Prior versions had `Write-Output` but `$ErrorActionPreference = "stop"` makes it a terminating error therefore ignoring the next exit code and returning with **0**, which again breaks behaviour of exit codes on errors.
+Prior versions had `Write-Error` but `$ErrorActionPreference = "stop"` makes it a terminating error therefore ignoring the next exit code and returning with **0**, which again breaks behaviour of exit codes on errors.
 
