@@ -1,3 +1,19 @@
+Exit code not working with Parameter-Attribute
+========
+Currently no explanation why PS breaks when using parameters in the file header to define script parameters.
+
+This code returns an exit code of **0** (e.g. `echo %ERRORLEVEL%`)
+
+```powershell
+Param(
+  [Parameter()]$a
+)
+exit 9999
+```
+
+If you remove the `[Parameter...]` block you will get the proper exit code.
+To workaround this behaviour replace **exit** with [[Environment]::Exit(...)](https://msdn.microsoft.com/de-de/library/system.environment.exit(v=vs.110).aspx)
+
 Error handling 
 ========
 
