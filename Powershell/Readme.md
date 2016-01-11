@@ -14,6 +14,13 @@ exit 9999
 If you remove the `[Parameter...]` block you will get the proper exit code.
 To workaround this behaviour replace **exit** with [[Environment]::Exit(...)](https://msdn.microsoft.com/de-de/library/system.environment.exit(v=vs.110).aspx)
 
+```powershell
+Param(
+  [Parameter()]$a
+)
+[Environment]::Exit(9999)
+```
+
 Error handling 
 ========
 
@@ -26,7 +33,7 @@ $ErrorActionPreference = "stop"
 trap [Exception] {
     echo "Trap encountered. Exiting with 1. See errors below"
     Write-Error $_
-    exit 1
+    [Environment]::Exit(1)
 }
 ```
 
