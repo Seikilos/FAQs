@@ -75,3 +75,30 @@ https://docs.angularjs.org/guide/services
 * Animation resources: https://docs.angularjs.org/guide/animations
 * Ensure jQuery is loaded before AngularJS
 * ***Hint***: Animations are no longer executed on page load (structural animations on boostrap) and either require hacking or paging in information
+
+For ngShow etc implement addClass/removeClass additionally to enter and leave:
+
+```js
+   animationModule.animation('.view-animation', function () {
+      return {
+         enter: function (element, done) {
+            element.hide();
+            element.show(500);
+         },
+         leave: function (element, done) {
+            element.hide(500);
+         },
+         addClass: function (element, className) {
+            if (className === "ng-hide") {
+               element.hide(500);
+            }
+         },
+         removeClass: function (element, className) {
+            if (className === "ng-hide") {
+               element.hide();
+               element.show(500);
+            }
+         }
+      };
+   });
+```
