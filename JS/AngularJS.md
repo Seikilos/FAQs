@@ -74,4 +74,4 @@ https://docs.angularjs.org/guide/services
 * ngAnimate, can use jQuery
 * Animation resources: https://docs.angularjs.org/guide/animations
 * Ensure jQuery is loaded before AngularJS
-* Hint: Animations are no longer not executed on page load (structural animations on boostrap) and either require hacking or paging in information
+* ***Hint***: Animations are no longer executed on page load (structural animations on boostrap) and either require hacking or paging in information
