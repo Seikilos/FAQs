@@ -92,3 +92,15 @@ When looking at dlls with missing pdb files, WinDbg's callstack may differe from
 
 The source of that is the dll export table, WinDbg reads the export definition of Dlls and resolve the names (of course only for exported symbols). To have a similar behaviour in Visual Studio, go to `Tools > Options > Debugging > General and select "Load dll exports"`
 
+Debugging Deadlocks (User-Mode Deadlocks)
+=========
+
+Reference: https://msdn.microsoft.com/en-us/library/windows/hardware/ff540592%28v=vs.85%29.aspx
+
+* Call `!locks` to obtain all locks, may take a while. Returns all critical sections with lock count
+* Count of 0 means not locked
+* Run `~` to see current threads
+* On thread with nummber X run `~X kb` to obtain call stack
+* Check for `WaitForCriticalSection` which means it has a lock (referenced in !locks) and is also waiting
+* First address in **Args to Child** is address of the critical section.
+* Check thread for the CritSec of this address and see whether it has a lock to another section to verify the deadlock
