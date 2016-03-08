@@ -104,3 +104,8 @@ Reference: https://msdn.microsoft.com/en-us/library/windows/hardware/ff540592%28
 * Check for `WaitForCriticalSection` which means it has a lock (referenced in !locks) and is also waiting
 * First address in **Args to Child** is address of the critical section.
 * Check thread for the CritSec of this address and see whether it has a lock to another section to verify the deadlock
+
+Optional
+* http://stackoverflow.com/questions/28163009/how-can-i-find-the-reason-of-hang-with-windbg-c
+* `!analyze -v -hang`
+* `!runaway`
