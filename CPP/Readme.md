@@ -109,3 +109,4 @@ Optional
 * http://stackoverflow.com/questions/28163009/how-can-i-find-the-reason-of-hang-with-windbg-c
 * `!analyze -v -hang`
 * `!runaway`
+* Also very useful: Load Dump in DebugDiag (Advanced Analysis) to get a nice html report of a dump
