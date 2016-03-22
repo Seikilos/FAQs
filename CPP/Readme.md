@@ -110,3 +110,13 @@ Optional
 * `!analyze -v -hang`
 * `!runaway`
 * Also very useful: Load Dump in DebugDiag (Advanced Analysis) to get a nice html report of a dump
+
+WinDBG: Set breakpoints on kernel functions, etc
+========
+
+Sometimes it is necessary to break on functions in WinDBG before they are know (e.g. visited) or unreachable otherwise.
+WinDBG allows to set breakpoints on matching functions:
+
+`bm /a Kernel32.dll!MapViewOfFile*` sets breakpoints on all variants of `MapViewOfFile` in Kernel32.dll
+
+`bm /a *!MapViewOfFile*` sets breakpoints on all variants in **ALL** modules. Allows to find same names in different modules aswell
