@@ -121,6 +121,7 @@ WinDBG allows to set breakpoints on matching functions:
 
 `bm /a *!MapViewOfFile*` sets breakpoints on all variants in **ALL** modules. Allows to find same names in different modules aswell
 
-**Important**: When watching the callstacks in WinDBG callstack window, click on **MORE**, you might miss relevant parts otherwise.
+**Important**: When watching the callstacks in WinDBG callstack window, click on **MORE**, you might miss relevant parts otherwise. Alternatively use explicit k command (works on explicit breakpoints only :/):
+`bp kernel32!MapViewOfFile "k"`
 
 **Hint**: Check `$spat` in conditional breakpoints (https://msdn.microsoft.com/en-us/library/windows/hardware/ff556853%28v=vs.85%29.aspx) to break into them when a condition like match in callstack has been met.
