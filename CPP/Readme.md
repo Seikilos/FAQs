@@ -121,6 +121,8 @@ WinDBG allows to set breakpoints on matching functions:
 
 `bm /a *!MapViewOfFile*` sets breakpoints on all variants in **ALL** modules. Allows to find same names in different modules aswell
 
+For all `b*` commands it is possible to append dbg command, like `bm /a *!MapViewOfFile* "k"` setting breakpoint on all found locations and executes command `k` on hit.
+
 **Important**: When watching the callstacks in WinDBG callstack window, click on **MORE**, you might miss relevant parts otherwise. Alternatively use explicit k command (works on explicit breakpoints only :/):
 `bp kernel32!MapViewOfFile "k"`
 
