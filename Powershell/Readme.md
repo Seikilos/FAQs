@@ -58,3 +58,18 @@ Set ```$ErrorActionPreference = "stop"``` to ensure errors do not continue and c
 
 Prior versions had `Write-Error` but `$ErrorActionPreference = "stop"` makes it a terminating error therefore ignoring the next exit code and returning with **0**, which again breaks behaviour of exit codes on errors.
 
+
+Starting scripts with *&* throws errors
+=========
+
+Calling script slike 
+
+```powershell
+& script.ps1 --dosomething
+```
+
+
+may throw messages like positional parameter `--dosomething` not found (even if it is defined in a `params` block), usually with an `PositionalParameterNotFound` exception. Calling this via `powershell -F` does work but is **massively** slower than `&`. 
+
+To fix the `&` version, use *one* dash for `-dosomething` instead of two.
+
