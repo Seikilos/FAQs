@@ -34,6 +34,7 @@ trap [Exception] {
 	echo "Trap encountered. Exiting with 1. See errors below"
 	$t = $host.ui.RawUI.ForegroundColor
 	$host.ui.RawUI.ForegroundColor = "Red"
+	Get-PSCallStack # This dumps callstack of caller, Callstack of exception in $_ not always usable
 	Write-Output $_ # will be red
 	$host.ui.RawUI.ForegroundColor = $t
    
