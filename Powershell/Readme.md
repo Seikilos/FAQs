@@ -38,7 +38,12 @@ trap [Exception] {
 	Write-Output $_ # will be red
 	$host.ui.RawUI.ForegroundColor = $t
    
-	[Environment]::Exit(1)
+	
+	# Exit only if parent is not a script or ISE
+	if( $host.name -notmatch 'ISE' -or $MyInvocation.ScriptName -ne "" )
+	{ 
+		[Environment]::Exit(1)
+	}
 }
 
 ```
