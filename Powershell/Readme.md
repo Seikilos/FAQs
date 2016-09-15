@@ -40,7 +40,7 @@ trap [Exception] {
    
 	
 	# Exit only if parent is not a script or ISE
-	if( $host.name -notmatch 'ISE' -or $MyInvocation.ScriptName -ne "" )
+	if( $host.name -notmatch 'ISE' -and $MyInvocation.ScriptName -ne "" )
 	{ 
 		[Environment]::Exit(1)
 	}
