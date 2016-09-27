@@ -24,6 +24,8 @@ Param(
 Error handling 
 ========
 
+Edit: As of now the entire handling errors is a mess in ps. A trap does properly work, even if calling a script from within a script. But if the result of the script is stored in a variable, all output is redirected to it. You will get an exit code 1 but not the message causing the problem.
+
 Use trap command to catch all exceptions (https://technet.microsoft.com/en-us/library/hh847742.aspx)
 
 Example: (Place on top):
