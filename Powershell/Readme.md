@@ -41,8 +41,8 @@ trap [Exception] {
 	$host.ui.RawUI.ForegroundColor = $t
    
 	
-	# Exit only if parent is not a script or ISE
-	if( $host.name -notmatch 'ISE' -and $MyInvocation.ScriptName -eq "" -or (Test-Path env:TEAMCITY_VERSION) )
+	# Exit should only be called on topmost scripts (not sub scripts) and never in ISE
+	if( $host.name -notmatch 'ISE' -and $MyInvocation.ScriptName -eq "" )
 	{ 
 		[Environment]::Exit(1)
 	}
