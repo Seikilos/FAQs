@@ -28,6 +28,8 @@ Edit: As of now the entire handling errors is a mess in ps. A trap does properly
 
 Use trap command to catch all exceptions (https://technet.microsoft.com/en-us/library/hh847742.aspx)
 
+**Important**: The following code does **not** work for Win 7 and PS Version 3 when dealing with syntax errors. However it seems to [work](http://stackoverflow.com/questions/40507389/cannot-catch-or-trap-syntax-error?noredirect=1#comment68266103_40507389) on Win 10 PS 5.1 
+
 Example: (Place on top):
 
 ```powershell
