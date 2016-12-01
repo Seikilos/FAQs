@@ -38,6 +38,14 @@ Working alternative -> Set gflags to `gflags.exe /i app.exe +ust` (enables user 
 
 ***Important: Remember to reset gflags  to -ust***
 
+Common native heap issues like large memory
+=========
+Use WinDBG with `!heap`, see references:
+
+https://blogs.msdn.microsoft.com/sudeepg/2009/05/22/manually-debugging-native-memory-leaks/
+
+https://www.codeproject.com/articles/31382/memory-leak-detection-using-windbg
+
 Application crashes only when debugger is not attached
 =========
 See http://stackoverflow.com/questions/811951/mt-and-md-builds-crashing-but-only-when-debugger-isnt-attached-how-to-debug and http://stackoverflow.com/questions/1060337/why-does-my-stl-code-run-so-slowly-when-i-have-the-debugger-ide-attached/1060929#1060929
