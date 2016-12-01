@@ -40,7 +40,7 @@ Working alternative -> Set gflags to `gflags.exe /i app.exe +ust` (enables user 
 
 Common native heap issues like large memory
 =========
-Use WinDBG with `!heap`, see references:
+Use WinDBG with `!address -summary` and `!heap`, see references:
 
 https://blogs.msdn.microsoft.com/sudeepg/2009/05/22/manually-debugging-native-memory-leaks/
 
