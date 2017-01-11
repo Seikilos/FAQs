@@ -127,3 +127,10 @@ For all `b*` commands it is possible to append dbg command, like `bm /a *!MapVie
 `bp kernel32!MapViewOfFile "k"`
 
 **Hint**: Check `$spat` in conditional breakpoints (https://msdn.microsoft.com/en-us/library/windows/hardware/ff556853%28v=vs.85%29.aspx) to break into them when a condition like match in callstack has been met.
+
+Release with Debug 
+========
+Important flags under Linker > Optimization, which should be set:
+* References: `No (/OPT:NOREF)`
+* Enable COMDAT Folding: `No (/OPT:NOICF)` 
+
