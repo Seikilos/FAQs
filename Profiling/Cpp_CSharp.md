@@ -24,6 +24,12 @@ using Microsoft.VisualStudio.Profiler;
 DataCollection.CommentMarkProfile(100, "Some Marker"); // Provide IDs
 ```
 
+Visual Studio Heap Profiling (VS 2015)
+==========
+VS 2015 can take memory screenshot and profile heap when debugger is attached using the diagnostic tools.
+
+For external solution see below ETW analysis.
+
 Event Tracing for Windows (ETW) and Windows Performance Analyzer
 ==========
 See https://randomascii.wordpress.com/2015/04/27/etw-heap-tracingevery-allocation-recorded/
