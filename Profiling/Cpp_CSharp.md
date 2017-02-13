@@ -24,6 +24,15 @@ using Microsoft.VisualStudio.Profiler;
 DataCollection.CommentMarkProfile(100, "Some Marker"); // Provide IDs
 ```
 
+Event Tracing for Windows (ETW) and Windows Performance Analyzer
+==========
+See https://randomascii.wordpress.com/2015/04/27/etw-heap-tracingevery-allocation-recorded/
+
+Traces native memory usage.
+
+Important: If UI looks outdated, this might be xperf. Ensure you start `"C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\wpa.exe"` (both, xperf and WPA have the same "Windows Performance Analyzer" title)
+
+
 dotMemory + dotCover
 ==========
 TBC
