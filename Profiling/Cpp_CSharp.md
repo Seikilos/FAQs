@@ -41,6 +41,9 @@ Important: If UI looks outdated, this might be xperf. Ensure you start `"C:\Prog
 
 dotMemory + dotCover
 ==========
+
+dotMemory does currently not require a license and can be used with any R# version.
+
 TBC
 
 Manual leak detection in native processes
@@ -60,6 +63,8 @@ Use WinDBG with `!address -summary` and `!heap`, see references:
 https://blogs.msdn.microsoft.com/sudeepg/2009/05/22/manually-debugging-native-memory-leaks/
 
 https://www.codeproject.com/articles/31382/memory-leak-detection-using-windbg
+
+*Hint*: WinDBG 10.0.10240.9 has a broken !heap -s, which returns a truncated list, see [SO](http://stackoverflow.com/questions/40931572/why-does-heap-s-heap-not-work-the-way-intended) thread.
 
 Application crashes only when debugger is not attached
 =========
