@@ -85,6 +85,8 @@ Also: Enable Page Heap for application in gflags and attach debugger.
 
 **Explanation of Windows Heap Management** http://blogs.msdn.com/b/jiangyue/archive/2010/03/16/windows-heap-overrun-monitoring.aspx
 
+*Additionally* https://blogs.msdn.microsoft.com/carlos/2008/12/10/heap-corruption-a-case-study/ 
+
 
 Hint: Debug with WinDbg for deeper analysis
 
