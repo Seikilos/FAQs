@@ -38,6 +38,15 @@ Traces native memory usage.
 
 Important: If UI looks outdated, this might be xperf. Ensure you start `"C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\wpa.exe"` (both, xperf and WPA have the same "Windows Performance Analyzer" title)
 
+Digested command line used by UIforETW. Use UIforETW at least to add and remove the proper `Image File Execution Option`
+
+* Begin Tracing: `xperf.exe -start "NT Kernel Logger" -on Latency+POWER+DISPATCHER+DISK_IO_INIT+FILE_IO+FILE_IO_INIT+VIRT_ALLOC+MEMINFO -stackwalk VirtualAlloc -buffersize 1024 -minbuffers 900 -maxbuffers 900 -f "e:\kernel.etl" -start UIforETWSession -on Microsoft-Windows-Win32k:0xfdffffffefffffff+Multi-MAIN+Multi-FrameRate+Multi-Input+Multi-Worker+Microsoft-Windows-Kernel-Memory:0xE0+Microsoft-Windows-Kernel-Power -buffersize 1024 -minbuffers 150 -maxbuffers 150 -f "e:\user.etl" -start xperfHeapSession -heap -Pids 0 -stackwalk HeapCreate+HeapDestroy+HeapAlloc+HeapRealloc -buffersize 1024 -minbuffers 1500 -maxBuffers 1500 -f "e:\heap.etl"`
+
+* Take snapshot and stop tracing:
+  * `xperf.exe -capturestate UIforETWSession Microsoft-Windows-Win32k:0xfdffffffefffffff+Multi-MAIN+Multi-FrameRate+Multi-Input+Multi-Worker+Microsoft-Windows-Kernel-Memory:0xE0+Microsoft-Windows-Kernel-Power`
+  * `xperf.exe -stop xperfHeapSession -stop UIforETWSession -stop "NT Kernel Logger"`
+  * `xperf.exe -merge "e:\kernel.etl" "e:\user.etl" "e:\heap.etl" "e:\Result.etl"`
+
 
 dotMemory + dotCover
 ==========
