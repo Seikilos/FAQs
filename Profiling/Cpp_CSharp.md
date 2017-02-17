@@ -28,6 +28,9 @@ Visual Studio Heap Profiling (VS 2015)
 ==========
 VS 2015 can take memory screenshot and profile heap when debugger is attached using the diagnostic tools.
 
+Update: While snapshots do display allocs and growth, opening such a snapshot results in a black window for large heaps.
+However 2015 now has a **Memory Profiling** option in the performance profiler view, which seems to handle large snapshots. [Article on MSDN](https://blogs.msdn.microsoft.com/visualstudioalm/2014/04/02/diagnosing-memory-issues-with-the-new-memory-usage-tool-in-visual-studio/)
+
 For external solution see below ETW analysis.
 
 Event Tracing for Windows (ETW) and Windows Performance Analyzer
@@ -47,6 +50,8 @@ Digested command line used by UIforETW. Use UIforETW at least to add and remove 
   * `xperf.exe -stop xperfHeapSession -stop UIforETWSession -stop "NT Kernel Logger"`
   * `xperf.exe -merge "e:\kernel.etl" "e:\user.etl" "e:\heap.etl" "e:\Result.etl"`
 
+
+**Warning:** Windows Performance Analyzer (wpa.exe) as of version 10.0.10586.15 crashes when adding "Stacks" to the *Heap Allocations* view.
 
 dotMemory + dotCover
 ==========
