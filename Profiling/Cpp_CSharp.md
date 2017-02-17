@@ -51,7 +51,7 @@ Digested command line used by UIforETW. Use UIforETW at least to add and remove 
   * `xperf.exe -merge "e:\kernel.etl" "e:\user.etl" "e:\heap.etl" "e:\Result.etl"`
 
 
-**Warning:** Windows Performance Analyzer (wpa.exe) as of version 10.0.10586.15 crashes when adding "Stacks" to the *Heap Allocations* view.
+**Warning:** Windows Performance Analyzer (wpa.exe) as of version 10.0.10586.15 crashes when adding "Stacks" to the *Heap Allocations* view for large etl files (tested with ~9GB).
 
 dotMemory + dotCover
 ==========
