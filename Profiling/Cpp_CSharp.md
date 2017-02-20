@@ -28,7 +28,7 @@ Visual Studio Heap Profiling (VS 2015)
 ==========
 VS 2015 can take memory screenshot and profile heap when debugger is attached using the diagnostic tools.
 
-Update: While snapshots do display allocs and growth, opening such a snapshot results in a black window for large heaps.
+Update: While snapshots do display allocs and growth, opening such a snapshot results in a black window for large heaps. Those snapshots require massive amount of disk space. A fix to this behaviour was to move User/temp, temp and pagefile to separate disk with enough space.
 However 2015 now has a **Memory Profiling** option in the performance profiler view, which seems to handle large snapshots. [Article on MSDN](https://blogs.msdn.microsoft.com/visualstudioalm/2014/04/02/diagnosing-memory-issues-with-the-new-memory-usage-tool-in-visual-studio/)
 
 For external solution see below ETW analysis.
