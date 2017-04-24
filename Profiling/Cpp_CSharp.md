@@ -5,14 +5,13 @@ Concurrency Visualizer
 
 Markers:
 
-````c#
+```c#
 // Assembly: Microsoft.ConcurrencyVisualizer.Markers.dll
 using Microsoft.ConcurrencyVisualizer.Instrumentation;
 
 var cs = Markers.EnterSpan("Span A");
 // Code 
 cs.Leave();
-
 ```
 
 Visual Studio Profiling
