@@ -83,3 +83,16 @@ may throw messages like positional parameter `--dosomething` not found (even if 
 
 To fix the `&` version, use *one* dash for `-dosomething` instead of two.
 
+Param with string array [string[]] not working properly
+=========
+
+If a script param block defines something like `[string[]]$var` it might not properly work when calling powershell via -file argument:
+
+`powershell -f file.ps1 "a", "b", 1` won't really have $var as an array rather emit an error that "b" cannot be bind, etc. This might be solved when using 
+`powershell -command 'file.ps1 "a", "b", 1'` but this also has drawbacks: Escaping must be done properly because the entire command is a string and a different behaviour in exit codes for the command version (see https://stackoverflow.com/questions/18410956/powershell-commands-exit-code-is-not-the-same-as-a-scripts-exit-code)
+
+A possible workaround is using the remaining values from arguments by adding `[Parameter(ValueFromRemainingArguments=$true)]` to the parameter, then this would work:
+
+`powershell -f file.ps1 a b c` 
+
+**Note:** The array arguments are now separated by whitespace
