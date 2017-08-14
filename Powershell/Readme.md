@@ -95,4 +95,4 @@ A possible workaround is using the remaining values from arguments by adding `[P
 
 `powershell -f file.ps1 a b c` 
 
-**Note:** The array arguments are now separated by whitespace
+**Note:** The array arguments are now separated by whitespace and has a negative side-effect: Named arguments do no longer work and positional arguments must be used.
