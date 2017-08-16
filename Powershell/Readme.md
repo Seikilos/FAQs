@@ -83,6 +83,26 @@ may throw messages like positional parameter `--dosomething` not found (even if 
 
 To fix the `&` version, use *one* dash for `-dosomething` instead of two.
 
+
+Starting scripts with *&* and redirecting error fails on first output
+=========
+
+
+Using 
+```powershell
+& program 2>d:\error.txt | Out-Null
+```
+will wait for application to complete but will directly abort execution when anything is written to error stream. This is bad when multiple lines are expected because although multiple lines might be written to the stream, powershell aborts execution apparently when it detects a new-line.
+
+Use `Start-Process` for that: 
+```powershell
+$proc = Start-Process -FilePath "program" -ArgumentList @("a", "b") -NoNewWindow -Wait -RedirectStandardError $strErrFile -PassThru
+echo ("Last exit code: "+$proc.ExitCode)
+```
+PassThru returns the process object and `ExitCode` can be used to examine result.
+
+
+
 Param with string array [string[]] not working properly
 =========
 
