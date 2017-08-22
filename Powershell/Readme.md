@@ -113,6 +113,19 @@ If a script param block defines something like `[string[]]$var` it might not pro
 
 A possible workaround is using the remaining values from arguments by adding `[Parameter(ValueFromRemainingArguments=$true)]` to the parameter, then this would work:
 
-`powershell -f file.ps1 a b c` 
+```powershell
+powershell -f file.ps1 a b c
+```
 
 **Note:** The array arguments are now separated by whitespace and has a negative side-effect: Named arguments do no longer work and positional arguments must be used.
+
+
+Starting script with powershell -f is slow (Use NoProfile)
+=========
+
+See http://www.powertheshell.com/bp_noprofile/
+
+Always start powershell without scripts loaded in the current profile!
+```powershell
+powershell.exe –NoProfile –File script.ps1
+```
