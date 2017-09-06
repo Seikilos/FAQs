@@ -129,3 +129,10 @@ Always start powershell without scripts loaded in the current profile!
 ```powershell
 powershell.exe –NoProfile –File script.ps1
 ```
+
+
+Quickly inspect members of objects
+=======
+Use `Get-Member` on an object:
+````powershell
+echo $obj | gm # or Get-Member```
