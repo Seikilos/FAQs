@@ -151,6 +151,7 @@ actually resolves to a signature
 public: __cdecl Master::Visit::Visit(class Master::Visit const & __ptr64) __ptr64
 ```
 
-The original message typically also contains the binary in which the issue was located. 
+The original message typically also contains the binary in which the issue was located. This is the signature that some binary expected to find. Use Dependency Walker on the binary and check what signature it actually contains. Dependency Walker can show you the decorated or undecorated method names. Look for the method and you will very likely see a slightly different signature.
+
 If this binary is under your control, check whether it is compiled with a signature that matches the one in the error. It might be something like a missing or added `const`, the difference of x86 or x64, etc.
-If the binary is not yours, you need to find an update (or a matching version to be exactly) or contact the developer on that issue.
+If the binary is not yours, you need to find an update (or a matching version to be precise) or contact the developer on that issue.
