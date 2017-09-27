@@ -134,3 +134,23 @@ Important flags under Linker > Optimization, which should be set:
 * References: `No (/OPT:NOREF)`
 * Enable COMDAT Folding: `No (/OPT:NOICF)` 
 
+
+Name Mangling or what does ??0Visit@Master@@QEAA@AEBV01@@Z actually mean
+========
+
+If you run a programm that cannot find some obscure methode like ??0Visit@Master@@QEAA@AEBV01@@Z in a message box it indicates that a binary expects a signature not available in some other part (typically another DLL).
+
+The Event Viewer in the System log contains this name as text so you can copy that. The name you see is "mangled". For more information on name mangling (here for Visual C++) see https://en.wikiversity.org/wiki/Visual_C%2B%2B_name_mangling
+
+Go to https://demangler.com/ and enter the mangled name, you will see that
+```
+??0Visit@Master@@QEAA@AEBV01@@Z
+```
+actually resolves to a signature 
+```
+public: __cdecl Master::Visit::Visit(class Master::Visit const & __ptr64) __ptr64
+```
+
+The original message typically also contains the binary in which the issue was located. 
+If this binary is under your control, check whether it is compiled with a signature that matches the one in the error. It might be something like a missing or added `const`, the difference of x86 or x64, etc.
+If the binary is not yours, you need to find an update (or a matching version to be exactly) or contact the developer on that issue.
