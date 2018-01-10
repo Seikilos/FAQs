@@ -62,7 +62,7 @@ Syntax errors, invalid arguments etc will all cause powershell to exit with code
 
 See https://social.technet.microsoft.com/Forums/windowsserver/en-US/dd56862f-a0c4-4398-a2e8-689facdb31a2/trycatch-block-not-catching-error-from-addadgroupmember-cmdlet and https://technet.microsoft.com/en-us/library/hh847796.aspx
 
-Set ```$ErrorActionPreference = "stop"``` to ensure errors do not continue and can actually be trapped with ```trap``` statement above exiting with 1
+Set ```$ErrorActionPreference = "stop"``` to ensure errors do not continue and can actually be trapped with ```trap``` statement above exiting with 1. Be aware that calling missing functions will trigger the trap but malformed code (e.g. missing braces) will exit powershell without trapping and returning _0_ in older powershell versions.
 
 *Why using `Write-Output` with overhead instead of `Write-Error`?*
 
