@@ -43,8 +43,8 @@ trap [Exception] {
 	$host.ui.RawUI.ForegroundColor = $t
    
 	
-	# Exit should only be called on topmost scripts (not sub scripts) and never in ISE
-	if( $host.name -notmatch 'ISE' -and $MyInvocation.ScriptName -eq "" )
+	# Exit should only be called on topmost scripts (not sub scripts) and never in ISE or VS Code
+	if( $host.name -notmatch 'ISE' -and $MyInvocation.ScriptName -eq ""  -and $host.name -notmatch 'Visual Studio Code')
 	{ 
 		[Environment]::Exit(1)
 	}
