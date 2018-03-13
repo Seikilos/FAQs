@@ -137,3 +137,10 @@ Use `Get-Member` on an object:
 ```powershell
 echo $obj | gm # or Get-Member
 ```
+
+
+Find double entries in files via powershell
+=======
+```powershell
+Get-Content <FILE> | Group-Object | Where-Object { $_.Count -gt 1 } | Select -ExpandProperty Name
+```
