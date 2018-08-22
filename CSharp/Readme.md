@@ -33,3 +33,14 @@ A solution to this is to add the sub directory to the `.config` file for the tes
 </configuration>
 ```
 See: https://msdn.microsoft.com/en-us/library/823z9h8w(v=vs.110).aspx
+
+Set Error Message to Englisch
+-------------------------
+
+```c#
+public static void SetToEnglisch()
+{
+    System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo("en-US");
+    System.Threading.Thread.CurrentThread.CurrentCulture = ci;
+}
+```
