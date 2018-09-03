@@ -44,3 +44,7 @@ public static void SetToEnglisch()
     System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.InvariantCulture;
 }
 ```
+
+Bootstrap .net Core in Native C++ Application
+=====
+See https://docs.microsoft.com/en-us/dotnet/core/tutorials/netcore-hosting
