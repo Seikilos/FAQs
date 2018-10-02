@@ -22,3 +22,7 @@ In Scenarios where a crash is detected by some means it is possible to disable t
 Also add (as String or REG_SZ) or set the value of **Auto** to **0** in
 
 `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug`
+
+Tail Logfile
+---------------------
+`Get-Content ./log.log -Wait -Tail 10`
