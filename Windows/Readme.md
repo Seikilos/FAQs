@@ -26,3 +26,9 @@ Also add (as String or REG_SZ) or set the value of **Auto** to **0** in
 Tail Logfile
 ---------------------
 `Get-Content ./log.log -Wait -Tail 10`
+
+Detect heap corruption early
+---------------------
+See https://randomascii.wordpress.com/2011/12/07/increased-reliability-through-more-crashes/
+
+The gist: Enable Pageheap via App Verifier, where each allocation gets own 4kb page and next page will be unmapped causing an access violation. Various issues can be detected (e.g. _buffer overrun_ on writing next page, etc.).
