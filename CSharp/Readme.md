@@ -38,7 +38,7 @@ Set Error Message to Englisch
 -------------------------
 
 ```c#
-public static void SetToEnglisch()
+public static void SetToEnglish()
 {
     System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
     System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.InvariantCulture;
