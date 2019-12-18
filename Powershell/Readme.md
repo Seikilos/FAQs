@@ -179,4 +179,12 @@ The copied secure string (not that secure) can be used as
 $password = "634cead364368c6a40a20..."  | ConvertTo-SecureString
 ```
 
+WebRequest for TLS resources
+==========
+Two things must be used when calling `Invoke-WebRequest` for SSL/TLS resources, the TLS1.2 mode and `-UseBasicParsing`:
+```powershell
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+Invoke-WebRequest "url" -UseBasicParsing
+```
+
 
