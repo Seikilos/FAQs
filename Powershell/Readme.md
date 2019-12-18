@@ -144,3 +144,39 @@ Find double entries in files via powershell
 ```powershell
 Get-Content <FILE> | Group-Object | Where-Object { $_.Count -gt 1 } | Select -ExpandProperty Name
 ```
+
+Credentials
+===========
+Asking for credentials
+----------------
+```powershell
+$creds = Get-Credential
+
+$user = $creds.UserName
+$password = $creds.Password
+
+$myCreds=New-Object System.Management.Automation.PSCredential -ArgumentList $user,$password
+# Now use this cred object like
+Invoke-WebRequest $url  -Proxy 'http://proxy:port' -ProxyCredential $myCreds
+```
+
+Store credentials in code (not secure)
+------------------
+Sometimes useful.
+*Important: Delete powershell history afterwards*
+
+Open new powershell console
+```powershell
+# Store the output string of this:
+"Password" | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString
+
+# Then clear history (and close console)
+del (Get-PSReadlineOption).HistorySavePath
+```
+
+The copied secure string (not that secure) can be used as
+```powershell
+$password = "634cead364368c6a40a20..."  | ConvertTo-SecureString
+```
+
+
