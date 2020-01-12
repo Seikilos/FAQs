@@ -145,6 +145,17 @@ Find double entries in files via powershell
 Get-Content <FILE> | Group-Object | Where-Object { $_.Count -gt 1 } | Select -ExpandProperty Name
 ```
 
+Creating new objects in Pipe
+===============
+`Select-Object` can create objects easily.
+
+Note: `n` and `e` are shortcuts for `Name` and `Expression` for each property.
+
+```powershell
+Get-Content -Encoding "UTF8" $file | Select-Object @{ n='line';e={$_}}, @{n='match'; e={$_ -replace "(.*_)(\d+)\.mp4", '$2'} }
+```
+
+
 Credentials
 ===========
 Asking for credentials
@@ -159,7 +170,6 @@ $myCreds=New-Object System.Management.Automation.PSCredential -ArgumentList $use
 # Now use this cred object like
 Invoke-WebRequest $url  -Proxy 'http://proxy:port' -ProxyCredential $myCreds
 ```
-
 Store credentials in code (not secure)
 ------------------
 Sometimes useful.
