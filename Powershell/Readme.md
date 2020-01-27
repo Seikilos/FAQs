@@ -197,4 +197,9 @@ Two things must be used when calling `Invoke-WebRequest` for SSL/TLS resources, 
 Invoke-WebRequest "url" -UseBasicParsing
 ```
 
+Find version numbers for a given assembly
+==============
 
+```powershell
+ Get-ChildItem .\file.dll | Select-Object Name,@{n='FileVersion';e={$_.VersionInfo.FileVersion}},@{n='AssemblyVersion';e={[Reflection.AssemblyName]::GetAssemblyName($_.FullName).Version}}
+```
