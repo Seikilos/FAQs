@@ -155,3 +155,13 @@ The original message typically also contains the binary in which the issue was l
 
 If this binary is under your control, check whether it is compiled with a signature that matches the one in the error. It might be something like a missing or added `const`, the difference of x86 or x64, etc.
 If the binary is not yours, you need to find an update (or a matching version to be precise) or contact the developer on that issue.
+
+Force Visual Studio Utility Project to always run
+==========
+In project file, add the flag to always create the project (this can be placed into any PropertyGroup)
+
+```xml
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>True</DisableFastUpToDateCheck>
+  </PropertyGroup>
+```
