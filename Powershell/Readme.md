@@ -21,6 +21,33 @@ Param(
 [Environment]::Exit(9999)
 ```
 
+Parameters
+========
+
+Ask for values
+-------------
+```powershell
+param (
+    [Parameter(Mandatory=$true)][string] $Name,
+    [Parameter(Mandatory=$true)][int] $Number
+)
+
+echo ("Name {0}, Number {1}" -f $Name, $Number)
+```
+
+
+Throw on missing parameters
+-------------------
+```powershell
+param (
+    [Parameter()][string] $Name = $(throw "Name missing"),
+    [Parameter()][int] $Number = $(throw "Number missing")
+)
+
+echo ("Name {0}, Number {1}" -f $Name, $Number)
+```
+
+
 Error handling 
 ========
 
