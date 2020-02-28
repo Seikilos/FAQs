@@ -32,3 +32,14 @@ Detect heap corruption early
 See https://randomascii.wordpress.com/2011/12/07/increased-reliability-through-more-crashes/
 
 The gist: Enable Pageheap via App Verifier, where each allocation gets own 4kb page and next page will be unmapped causing an access violation. Various issues can be detected (e.g. _buffer overrun_ on writing next page, etc.).
+
+
+RDP issues or dns record not propertly resolved
+------------------
+When RDP to a hostname does not work, or `nslookup The_name` does not resolve the name. Try this on the **destination** machine (second command needs elevation):
+
+```
+ipconfig /flushdns
+ipconfig /registerdns
+```
+The first command might be necessary on both sides but `/registerdns` updates or creates the DNS record on the active directory to which it is connected which should cause all other machines to be able to reach it.
