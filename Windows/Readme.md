@@ -43,3 +43,17 @@ ipconfig /flushdns
 ipconfig /registerdns
 ```
 The first command might be necessary on both sides but `/registerdns` updates or creates the DNS record on the active directory to which it is connected which should cause all other machines to be able to reach it.
+
+## Windows user groups
+----------------------------
+Display all user groups available:
+
+```ps
+# Console
+gcim Win32_Account | ft Name, SID # ft = FeatureTable
+
+# DataGrid
+gcim Win32_Account | select Name, SID | ogv # ogv= Out-GridView
+```
+
+See https://docs.microsoft.com/en-us/windows/win32/secauthz/well-known-sids
