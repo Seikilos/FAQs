@@ -187,7 +187,7 @@ Select statement similar to LINQ Select
 Use `Select-Object` with `-ExpandProperty` to remove the Property name.
 
 ```powershell
-$list | Select-Object Fullname # Creates a list, when dumped to string, having a leadin "Fullname" in the output
+$list | Select-Object Fullname # Creates a list, when dumped to string, having a leading "Fullname" in the output
 
 $list | Select-Object -ExpandProperty Fullname # fixes this
 ```
