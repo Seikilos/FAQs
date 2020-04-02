@@ -182,6 +182,15 @@ Note: `n` and `e` are shortcuts for `Name` and `Expression` for each property.
 Get-Content -Encoding "UTF8" $file | Select-Object @{ n='line';e={$_}}, @{n='match'; e={$_ -replace "(.*_)(\d+)\.mp4", '$2'} }
 ```
 
+Select statement similar to LINQ Select
+================
+Use `Select-Object` with `-ExpandProperty` to remove the Property name.
+
+```powershell
+$list | Select-Object Fullname # Creates a list, when dumped to string, having a leadin "Fullname" in the output
+
+$list | Select-Object -ExpandProperty Fullname # fixes this
+```
 
 Credentials
 ===========
