@@ -11,3 +11,17 @@ and execute this line *as admin*
 ```bat
 schtasks /create /RU "SYSTEM" /NP /SC ONSTART /TN Reset-AppX /TR "powershell C:\Powershell\Fix-Sysprep.ps1" /F
 ```
+
+NetNative compiling ILC issues
+===============================
+
+32 bit nutc compiler sometimes fails, without looking at diagnostic output of msbuild there is no really helpful error. Force it to 64 bit
+
+```xml
+<Use64BitCompiler>true</Use64BitCompiler>
+
+<!-- Unverified -->
+<ShortcutGenericAnalysis>true</ShortcutGenericAnalysis>
+<SingleThreadNUTC>true</SingleThreadNUTC> <!-- This might slow things down a lot -->
+
+```
