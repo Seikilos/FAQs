@@ -68,6 +68,8 @@ Whether this is an UWP or ESRI bug is unclear.
 
 The issue is located in UWP apps' `XamlTypeInfo.g.cs` file. When an UWP library uses anything from ESRI, whether it will work or not, currently depends on the name of the library. If the name of the library starts with a letter that comes before E it will fail, everything post E will work. UWP generates the `XamlTypeInfo.g.cs` by name.
 
+This only happens if Esri.Runtime _and_ Toolkit have been referenced.
+
 Failing example, because Assembly namespace starts with `Abar`
 
 ```cs
