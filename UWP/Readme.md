@@ -53,3 +53,65 @@ public uint? SomeNumber  // <-- uint?
 	}
 }
 ```
+
+UWP crashes without usable callstack (possibly with ESRI runtime) / fix by renaming projects
+=============================
+
+What happens: When a component that uses ESRI is loaded from a separate project it sometimes cannot be loaded. Renaming the project might fix this issue.
+
+`
+Exe --> A.DLL // fail
+Exe --> F.DLL // works
+`
+
+Whether this is an UWP or ESRI bug is unclear.
+
+The issue is located in UWP apps' `XamlTypeInfo.g.cs` file. When an UWP library uses anything from ESRI, whether it will work or not, currently depends on the name of the library. If the name of the library starts with a letter that comes before E it will fail, everything post E will work. UWP generates the `XamlTypeInfo.g.cs` by name.
+
+Failing example, because Assembly namespace starts with `Abar`
+
+```cs
+private global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider> OtherProviders
+{
+	get
+	{
+		if(_otherProviders == null)
+		{
+			var otherProviders = new global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider>();
+			global::Windows.UI.Xaml.Markup.IXamlMetadataProvider provider;
+			provider = new global::Abar.SituationEditor_Ui_XamlTypeInfo.XamlMetaDataProvider() as global::Windows.UI.Xaml.Markup.IXamlMetadataProvider;
+			otherProviders.Add(provider); 
+			provider = new global::Esri.ArcGISRuntime.Esri_ArcGISRuntime_Universal_XamlTypeInfo.XamlMetaDataProvider() as global::Windows.UI.Xaml.Markup.IXamlMetadataProvider;
+			otherProviders.Add(provider); 
+			provider = new global::Esri.ArcGISRuntime.Toolkit.Esri_ArcGISRuntime_Toolkit_XamlTypeInfo.XamlMetaDataProvider() as global::Windows.UI.Xaml.Markup.IXamlMetadataProvider;
+			otherProviders.Add(provider); 
+			_otherProviders = otherProviders;
+		}
+		return _otherProviders;
+	}
+}
+```
+
+If the library is called `Fbar`, the order is different and the code then works
+
+````cs
+private global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider> OtherProviders
+{
+	get
+	{
+		if(_otherProviders == null)
+		{
+			var otherProviders = new global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider>();
+			global::Windows.UI.Xaml.Markup.IXamlMetadataProvider provider;
+			provider = new global::Esri.ArcGISRuntime.Esri_ArcGISRuntime_Universal_XamlTypeInfo.XamlMetaDataProvider() as global::Windows.UI.Xaml.Markup.IXamlMetadataProvider;
+			otherProviders.Add(provider); 
+			provider = new global::Esri.ArcGISRuntime.Toolkit.Esri_ArcGISRuntime_Toolkit_XamlTypeInfo.XamlMetaDataProvider() as global::Windows.UI.Xaml.Markup.IXamlMetadataProvider;
+			otherProviders.Add(provider); 
+			provider = new global::Fbar.SituationEditor_Ui_XamlTypeInfo.XamlMetaDataProvider() as global::Windows.UI.Xaml.Markup.IXamlMetadataProvider;
+			otherProviders.Add(provider); 
+			_otherProviders = otherProviders;
+		}
+		return _otherProviders;
+	}
+}
+```
