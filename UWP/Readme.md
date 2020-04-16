@@ -94,7 +94,7 @@ private global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.I
 
 If the library is called `Fbar`, the order is different and the code then works
 
-````cs
+```cs
 private global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider> OtherProviders
 {
 	get
