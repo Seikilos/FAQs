@@ -239,3 +239,42 @@ Find version numbers for a given assembly
 ```powershell
  Get-ChildItem .\file.dll | Select-Object Name,@{n='FileVersion';e={$_.VersionInfo.FileVersion}},@{n='AssemblyVersion';e={[Reflection.AssemblyName]::GetAssemblyName($_.FullName).Version}}
 ```
+
+
+UNC Path not available after it was available a moment ago
+=================
+For some reasons UNC paths may be inaccessible after they were accessed a moment ago.
+Await the path to become ready
+
+```powershell
+function Wait-For-Path-Ready($path) {
+    echo "Waiting for '$path' be ready"
+    $tries = 100
+    $waitInMs = 100
+    $success = $false
+
+    for ($i = 0; $i -le $tries; ++$i) {
+        try {
+
+            Get-ChildItem $path -ErrorAction Stop | Out-Null
+            $success = $true
+            break;
+
+        }
+        catch {
+            echo "Path not ready, retrying"
+            Start-Sleep -Milliseconds $waitInMs
+        }
+    }
+ 
+    if( $success )
+    {
+        echo "Path is ready"
+    }
+    else {
+        throw "$path failed to become ready after $($tries*$waitInMs / 1000) seconds"
+    }
+
+}
+
+```
