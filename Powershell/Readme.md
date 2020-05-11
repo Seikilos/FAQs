@@ -278,3 +278,16 @@ function Wait-For-Path-Ready($path) {
 }
 
 ```
+
+xpath query without namespaces
+====================
+Somtimes you want query an xpath without qualifying namespaces.
+
+```powershell
+# Namespace aware, won't return nodes, when some parent uses xmlns="..."
+([xml]Get-Content some.xml -Raw).SelectNodes("//ProjectReference/PrivateAssets");
+
+# Namespace agnostic
+([xml]Get-Content some.xml -Raw).SelectNodes("//*[local-name() = 'ProjectReference']/*[local-name() = 'PrivateAssets']");
+
+```
