@@ -117,3 +117,13 @@ private global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.I
 	}
 }
 ```
+
+UWP casting types in xaml for x:Bind
+========================
+See https://docs.microsoft.com/en-us/windows/uwp/xaml-platform/x-bind-markup-extension but check the _alternative_ Syntax
+
+You can cast like this
+```xaml
+<Button Command="{x:Bind DataContext.(viewModels:MyViewModel.TheCommand)}" />
+```
+
