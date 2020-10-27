@@ -1,6 +1,10 @@
 Windows tricks
 ====================
 
+Go to old Control setting
+-------------------
+<kbd>Win + R</kbd>, type `control`, <kbd>Enter</kbd>
+
 Remote Desktop exit
 -------------------
 
