@@ -61,3 +61,10 @@ gcim Win32_Account | select Name, SID | ogv # ogv= Out-GridView
 ```
 
 See https://docs.microsoft.com/en-us/windows/win32/secauthz/well-known-sids
+
+Windows paths longer than 260 chars
+-------------------
+
+Prefix `\\?\` to switch to unicode, this allows for much longer path names (does not support `.`, `..` or `/`)
+
+See [StackOverflow](https://stackoverflow.com/a/21194605) and [Microsoft](https://docs.microsoft.com/en-US/windows/win32/fileio/naming-a-file?redirectedfrom=MSDN)
