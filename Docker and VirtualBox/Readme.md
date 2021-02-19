@@ -12,3 +12,10 @@ bcdedit /set hypervisorlaunchtype auto
 # To run virtual box, disable hyper V and reboot
 bcdedit /set hypervisorlaunchtype off
 ```
+
+# docker images (not -a) shows many <none>:<none> entries
+In contrast to `docker images -a` these entries are wasting space. Clean them with
+  
+`docker rmi $(docker images -f "dangling=true" -q)`
+
+See this [link](https://www.projectatomic.io/blog/2015/07/what-are-docker-none-none-images/) for more information
