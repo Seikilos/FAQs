@@ -15,15 +15,15 @@ If this fail, *create backup of TFS_Collection first* then execute queries on th
 
 ```sql
 DECLARE @CollectionName varchar(60)
-SET @CollectionName = 'Full_Collection_Name'
+SET @CollectionName = 'the Database name set in the Edit Settings dialog'
 
-select * from tbl_Database where DatabaseName LIKE '%'+@CollectionName+'%'
+select * from tbl_Database where DatabaseName LIKE '%;'+@CollectionName
 select * from tbl_ServiceHost where Name = @CollectionName
 select * from tbl_CatalogResource WHERE DisplayName =  @CollectionName
 select * from tbl_GroupScope where name = REPLACE(@CollectionName, '_', '>')
 select * from tbl_HostResolutionEntry where HostKey = '/'+@CollectionName+'/'
-select * from tbl_JobDefinition where JobName LIKE '%'+@CollectionName+'%'
-select * from tbl_PropertyValue WHERE LeadingStringValue LIKE '%'+@CollectionName+'%'
+select * from tbl_JobDefinition where JobName LIKE '%'+@CollectionName+','
+select * from tbl_PropertyValue WHERE LeadingStringValue LIKE '%'+@CollectionName
 ```
 ensure, no wrong rows accross those tables were selected. Then replace select by *delete*
 
