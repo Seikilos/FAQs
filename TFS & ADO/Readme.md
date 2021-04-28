@@ -31,3 +31,6 @@ SQL
 ---------------
 * Permission on Server are not automatically inherited to single databases and must be set individually
 
+Transaction log is full
+-----------------
+Perform full backup, see https://blog.atwork.at/post/SQL-Server-The-transaction-log-for-database-is-full
