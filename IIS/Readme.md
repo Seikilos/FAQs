@@ -7,7 +7,7 @@
 
 
 # Executing Word on a server impersonating another user
-* Most important: Don't do it. Microsoft says don't do it, it is a not supported use case
+* Most important: Don't do it. [Microsoft says don't do it](https://support.microsoft.com/en-us/topic/considerations-for-server-side-automation-of-office-48bcfe93-8a89-47f1-0bce-017433ad79e2), it is a not supported use case
 * You won't get all error messages
 * You will get permission issues
 * You will get all sorts of quirky behaviour
