@@ -11,7 +11,7 @@
 * You won't get all error messages
 * You will get permission issues
 * You will get all sorts of quirky behaviour
-* You will never see the UI to see if it failed because impersonate execution from say svhost has no UI session, where you actually could see it
+* You will never see the UI to see if it failed because impersonate execution from say svchost has no UI session, where you actually could see it (also probably not in session 0)
 
 ## I understand and ignore this
 If you chose to ignore this. Ok. See [SO](https://stackoverflow.com/a/1680214/2416394) 
