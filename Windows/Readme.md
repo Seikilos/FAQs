@@ -68,3 +68,8 @@ Windows paths longer than 260 chars
 Prefix `\\?\` to switch to unicode, this allows for much longer path names (does not support `.`, `..` or `/`)
 
 See [StackOverflow](https://stackoverflow.com/a/21194605) and [Microsoft](https://docs.microsoft.com/en-US/windows/win32/fileio/naming-a-file?redirectedfrom=MSDN)
+
+
+# Windows terminates RDP session after certain time
+Check registry path `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\MaxDisconnectionTime`. 
+Also see [admx.help](https://admx.help/?Category=Windows_10_2016&Policy=Microsoft.Policies.TerminalServer::TS_SESSIONS_Disconnected_Timeout_2&Language=de-de)
