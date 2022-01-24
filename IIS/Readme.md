@@ -5,6 +5,9 @@
 * On the right `Edit Feature Settings`
 * Set to `Detailed errors`
 
+# More logs and where to find them
+https://hahndorf.eu/blog/iislogging.html
+
 
 # Executing Word on a server impersonating another user
 * Most important: Don't do it. [Microsoft says don't do it](https://support.microsoft.com/en-us/topic/considerations-for-server-side-automation-of-office-48bcfe93-8a89-47f1-0bce-017433ad79e2), it is a not supported use case
