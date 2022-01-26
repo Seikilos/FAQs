@@ -21,6 +21,6 @@ The installer does not check the *offline layout* folder for it but starts looki
 It does not exist there, obviously and instead turning to the offline layout, it pulls the catalog file and tries to download it.
 
 Possible workarounds:
-* Copy all packages from the offline layout manually to `%PROGRAMDATA%/Microsoft/VisualStudio/Packages`. Then try again. Note: This might require a lot of disk space
-* Download a new vanilla offline layout and try again (tried and failed) => Appears that currently visual studio clean install without internet documentation is not complete
+* ✔️Copy all packages from the offline layout manually to `%PROGRAMDATA%/Microsoft/VisualStudio/Packages`. Then start the installer from the offline cache again. Note: This might require a lot of disk space. This should prevent downloading files.
+* ❌ Download a new vanilla offline layout and try again (tried and failed) => Appears that currently visual studio clean install without internet documentation is not complete
 
