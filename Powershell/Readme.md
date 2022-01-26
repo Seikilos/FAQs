@@ -291,3 +291,21 @@ Somtimes you want query an xpath without qualifying namespaces.
 ([xml]Get-Content some.xml -Raw).SelectNodes("//*[local-name() = 'ProjectReference']/*[local-name() = 'PrivateAssets']");
 
 ```
+
+Group Files by date and display grouped size of them
+=============================
+```powershell
+get-Childitem PATH | Group {$_.LastWriteTime.ToString("yyyy-MM-dd")} | Sort Name | Foreach-Object {Write-Host ("Date: {0}, Count: {1}, Size in GB: {2}" -f $_.Name, $_.Count, (($_.Group | Measure-Object -Sum Length).Sum /1GB))}
+```
+
+Result looks like
+```
+Date: 2022-01-08, Count: 648, Size in GB: 53,5989532470703
+Date: 2022-01-09, Count: 464, Size in GB: 1299,17489814758
+Date: 2022-01-10, Count: 747, Size in GB: 88,04141664505
+Date: 2022-01-11, Count: 741, Size in GB: 140,498733043671
+Date: 2022-01-12, Count: 768, Size in GB: 179,834815979004
+Date: 2022-01-13, Count: 760, Size in GB: 173,782751083374
+Date: 2022-01-14, Count: 328, Size in GB: 191,552196502686
+```
+
