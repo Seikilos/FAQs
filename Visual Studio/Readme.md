@@ -22,5 +22,5 @@ It does not exist there, obviously and instead turning to the offline layout, it
 
 Possible workarounds:
 * Copy all packages from the offline layout manually to `%PROGRAMDATA%/Microsoft/VisualStudio/Packages`. Then try again. Note: This might require a lot of disk space
-* Download a new vanilla offline layout and try again
+* Download a new vanilla offline layout and try again (tried and failed) => Appears that currently visual studio clean install without internet documentation is not complete
 
