@@ -21,6 +21,13 @@ The installer does not check the *offline layout* folder for it but starts looki
 It does not exist there, obviously and instead turning to the offline layout, it pulls the catalog file and tries to download it.
 
 Possible workarounds:
-* ✔️Copy all packages from the offline layout manually to `%PROGRAMDATA%/Microsoft/VisualStudio/Packages`. Then start the installer from the offline cache again. Note: This might require a lot of disk space. This should prevent downloading files.
+* ❌Copy all packages from the offline layout manually to `%PROGRAMDATA%/Microsoft/VisualStudio/Packages`. Then start the installer from the offline cache again. Note: This might require a lot of disk space. This should prevent downloading files.
+  * Appeared to work but caused issues later on
 * ❌ Download a new vanilla offline layout and try again (tried and failed) => Appears that currently visual studio clean install without internet documentation is not complete
 
+Last known approach
+====
+* Uninstall Visual Studio and all SDKs, etc. from the machine
+* Delete the `%PROGRAMDATA%/Microsoft/VisualStudio/Packages` folder
+* Create a full layout with all languages: `.\vs_professional.exe --layout 'F:\\Visual Studio 2019\\layout' --useLatestInstaller --includeRecommended --all`
+* Install again
