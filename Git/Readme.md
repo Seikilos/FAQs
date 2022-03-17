@@ -1,12 +1,12 @@
 Git
----------------
+==============
 
 Show all proxy settings
-==================
+-------------
 ` git config --global --get-regexp http.*`
 
 Configure proxy for single resources
-==================
+------------
 Edit ~/.gitconfig
 
 ```
