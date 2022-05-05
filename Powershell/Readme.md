@@ -309,3 +309,11 @@ Date: 2022-01-13, Count: 760, Size in GB: 173,782751083374
 Date: 2022-01-14, Count: 328, Size in GB: 191,552196502686
 ```
 
+Reload PATH Variable inside script
+======================================
+```ps1
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+# Here new path variable is available to find new binaries
+```
+
+
