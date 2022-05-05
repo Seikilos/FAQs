@@ -309,6 +309,13 @@ Date: 2022-01-13, Count: 760, Size in GB: 173,782751083374
 Date: 2022-01-14, Count: 328, Size in GB: 191,552196502686
 ```
 
+Get size of folders
+=========================
+```ps1
+ Get-Childitem . | ForEach-Object { Write-Host( "{0,-30}`tSize {1} GB" -f $_, (( Get-ChildItem $_ -Recurse | Measure-Object -Sum Length).Sum /1GB)) }
+
+```
+
 Reload PATH Variable inside script
 ======================================
 ```ps1
