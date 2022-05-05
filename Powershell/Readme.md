@@ -312,7 +312,7 @@ Date: 2022-01-14, Count: 328, Size in GB: 191,552196502686
 Get size of folders
 =========================
 ```ps1
- Get-Childitem . | ForEach-Object { Write-Host( "{0,-30}`tSize {1} GB" -f $_, (( Get-ChildItem $_ -Recurse | Measure-Object -Sum Length).Sum /1GB)) }
+ Get-Childitem . | ForEach-Object { Write-Host( "{0,-30}`tSize {1:0.##} GB" -f $_, (( Get-ChildItem $_ -Recurse | Measure-Object -Sum Length).Sum /1GB)) }
 
 ```
 
