@@ -16,3 +16,12 @@ Go to sharepoint server, open **sharepoint** powershell
 * Check again a report to see if WSS_Logging is smaller now
 * Re-Enable the identity
 * Monitor regularly whether the size increases again. If yes, fix the source.
+
+Powershell addins not loaded
+-------------------------------------
+If you cannot execute sharepoint related commands, load the sharepoint powershell integration
+
+Call 
+```ps1
+C:\Windows\Microsoft.NET\Framework64\v4.0.30319\InstallUtil /LogToConsole=true C:\Windows\Microsoft.NET\assembly\GAC_MSIL\Microsoft.SharePoint.PowerShell\v4.0_15.0.0.0__71e9bce111e9429c\Microsoft.SharePoint.Powershell.dll
+```
