@@ -1,3 +1,6 @@
+Write-Output "Running winsat formal (output is supressed) ..."
+. winsat formal | Out-Null
+
 $item = Get-ChildItem "$env:SystemRoot\Performance\WinSat\DataStore" -Filter "*Formal*" | Sort-Object -Descending {$_.CreationTime} | Select-Object -First 1
 
 [xml]$xml = Get-Content $item.FullName
