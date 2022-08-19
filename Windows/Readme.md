@@ -77,4 +77,4 @@ Also see [admx.help](https://admx.help/?Category=Windows_10_2016&Policy=Microsof
 
 Measure Performance (built-in)
 ---------------------------
-See [Measure-Performance](Measure-Performance.ps1) Script
+See [Measure-Performance](Measure-Performance.ps1) Script. However `winsat` does not work with terminal services like RDP sessions.
