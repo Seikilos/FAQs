@@ -73,3 +73,8 @@ See [StackOverflow](https://stackoverflow.com/a/21194605) and [Microsoft](https:
 # Windows terminates RDP session after certain time
 Check registry path `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\MaxDisconnectionTime`. 
 Also see [admx.help](https://admx.help/?Category=Windows_10_2016&Policy=Microsoft.Policies.TerminalServer::TS_SESSIONS_Disconnected_Timeout_2&Language=de-de)
+
+
+Measure Performance (built-in)
+---------------------------
+See [Measure-Performance](Measure-Performance.ps1) Script
