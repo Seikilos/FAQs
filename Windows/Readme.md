@@ -88,3 +88,7 @@ Powersehll admin
 New-ItemProperty -path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -name "TaskbarGlomLevel" -value "2" -PropertyType DWORD
 ```
 Go to `taskmgr`, select `explorer.exe` and execute `restart` command to apply.
+
+Install .net Framework 3.5 from ISO via DISM
+===================================
+`DISM /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:d:\sources\sxs`
