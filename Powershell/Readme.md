@@ -1,3 +1,13 @@
+Windows Credential-Manager without CredentialManager Module
+=========================
+
+```powershell
+. vaultcmd /list
+
+. vaultcmd.exe /listcreds:"Windows-Anmeldeinformationen"
+```
+
+
 Exit code not working with Parameter-Attribute
 ========
 Currently no explanation why PS breaks when using parameters in the file header to define script parameters.
