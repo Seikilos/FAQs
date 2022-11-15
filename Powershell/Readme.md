@@ -15,6 +15,12 @@ Windows Credential-Manager without CredentialManager Module
 . vaultcmd.exe /addcreds:"Windows-Anmeldeinformationen" /credtype:"{3E0E35BE-1B77-43E7-B873-AED901B6275B}" /identity:TestCred /authenticator:Test /resource:Server /savedBy:Test
 ```
 
+Life-Hack to use vaultcmd.exe with powershells secure strings from `Get-Credential`
+
+```powershell
+$pwd = (Get-Credential).GetNetworkCredential().Password
+```
+
 
 Exit code not working with Parameter-Attribute
 ========
