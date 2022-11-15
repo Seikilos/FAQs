@@ -2,9 +2,17 @@ Windows Credential-Manager without CredentialManager Module
 =========================
 
 ```powershell
+# List all credential stores
 . vaultcmd /list
 
+# List logins in specific credential store
 . vaultcmd.exe /listcreds:"Windows-Anmeldeinformationen"
+
+# find required credential types 
+.  vaultcmd.exe /listschema
+
+# register a new domain login for server
+. vaultcmd.exe /addcreds:"Windows-Anmeldeinformationen" /credtype:"{3E0E35BE-1B77-43E7-B873-AED901B6275B}" /identity:TestCred /authenticator:Test /resource:Server /savedBy:Test
 ```
 
 
