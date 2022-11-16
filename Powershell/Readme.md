@@ -21,6 +21,18 @@ Life-Hack to use vaultcmd.exe with powershells secure strings from `Get-Credenti
 $pwd = (Get-Credential).GetNetworkCredential().Password
 ```
 
+Use PSGallery behind Authenticating Proxy
+======================
+```ps1
+[system.net.webrequest]::defaultwebproxy = new-object system.net.webproxy('http://<address>:<port>')
+[system.net.webrequest]::defaultwebproxy.credentials = (Get-Credential)
+[system.net.webrequest]::defaultwebproxy.BypassProxyOnLocal = $true
+
+# Then install ...
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+Install-Module -Name CredentialManager -Force
+```
+
 
 Exit code not working with Parameter-Attribute
 ========
