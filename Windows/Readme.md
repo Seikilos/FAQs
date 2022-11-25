@@ -92,3 +92,13 @@ Go to `taskmgr`, select `explorer.exe` and execute `restart` command to apply.
 Install .net Framework 3.5 from ISO via DISM
 ===================================
 `DISM /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:d:\sources\sxs`
+
+Check if Domain Account is locked (no admin permissions)
+=====================================
+Open a powershell on a domain attached machine and type
+
+```ps1
+Import-Module ActiveDirectory
+Get-aduser -identity THE_USER -properties * | select accountexpirationdate, accountexpires, accountlockouttime, badlogoncount, padpwdcount, lastbadpasswordattempt, lastlogondate, lockedout, passwordexpired, passwordlastset, pwdlastset | format-list
+```
+
