@@ -97,6 +97,12 @@ Check if Domain Account is locked (no admin permissions)
 =====================================
 Open a powershell on a domain attached machine and type
 
+```
+net user USER_NAME /domain
+```
+
+or
+
 ```ps1
 Import-Module ActiveDirectory
 Get-aduser -identity THE_USER -properties * | select accountexpirationdate, accountexpires, accountlockouttime, badlogoncount, padpwdcount, lastbadpasswordattempt, lastlogondate, lockedout, passwordexpired, passwordlastset, pwdlastset | format-list
