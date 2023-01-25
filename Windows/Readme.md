@@ -170,6 +170,10 @@ If you are unsure, create a c++ console application that is using the code in qu
     00303248  "Foobar"
     ```
 * *The quick and automated way* is using the offset of the stack pointer: `du poi(@esp+4)`. Or if this fails `du rbx`. (**Important**: For the new debugger model you need the WinDBG from App Store)
-* If the string is from CLR, execute `!dso` command and look in the stack to see strings used.
+* If the string is from CLR, execute `!dso` command and look in the stack to see strings used. (You might need to call `.loadby sos coreclr` first)
+* Bonus: To not manually step through you can set the breakpoint to automatically to continue.
+   * `bc 0` to clean the breakpoint
+   * `bu KERNELBASE!GetEnvironmentVariableW "du rbx;!dso;g"` -> will dump and then continue with `g`. You might want to `.clr` the output window first
+   
 
 Now you have the string
