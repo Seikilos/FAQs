@@ -170,5 +170,6 @@ If you are unsure, create a c++ console application that is using the code in qu
     00303248  "Foobar"
     ```
 * *The quick and automated way* is using the offset of the stack pointer: `du poi(@esp+4)`. Or if this fails `du rbx`. (**Important**: For the new debugger model you need the WinDBG from App Store)
+* If the string is from CLR, execute `!dso` command and look in the stack to see strings used.
 
 Now you have the string
