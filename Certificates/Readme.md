@@ -37,7 +37,7 @@ nano / notepad.exe client.cnf
 	extendedKeyUsage = serverAuth, clientAuth
 ```
 
-Creare the crt
+Create the crt
 
 `openssl x509 -req -in client1.csr -CA ca.crt -CAkey ca-private-key.pem -CAcreateserial -days 1000 -sha256 -extfile client.cnf -out client1.crt`
 
