@@ -359,4 +359,77 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";"
 # Here new path variable is available to find new binaries
 ```
 
+Zipping fast with 7zip
+======================================
+`Compress-Archive` has very poor performance storing large data into zip. This is a faster wrapper
+
+```ps1
+function Compress-7Zip(
+    [Parameter(Mandatory = $true, HelpMessage="Base folder of source. Up to this directory will not be included in the zip. See https://sevenzip.osdn.jp/chm/cmdline/commands/add.htm")]
+    [string]
+    $RootSourceDir,
+    [Parameter(Mandatory = $true, HelpMessage="See https://sevenzip.osdn.jp/chm/cmdline/switches/include.htm")]
+    [string]
+    $IncludePattern,
+    [Parameter(Mandatory = $false, HelpMessage="See https://sevenzip.osdn.jp/chm/cmdline/switches/exclude.htm")]
+    [string]
+    $ExcludePattern,
+    [Parameter(Mandatory = $true)]
+    [string]
+    $OutFile
+)
+{
+    # Set this part correctly
+    $7zip = "$PSScriptRoot\3rdParty\7Zip\7z.exe"
+
+    if(!(Test-Path $7zip))
+    {
+        throw "Did not find 7zip at '$7zip'"
+    }
+
+    if(!(Test-Path $RootSourceDir))
+    {
+        throw "Source directory '$RootSourceDir' does not exist."
+    }
+
+    if(Test-Path $OutFile)
+    {
+        Remove-Item -Force $OutFile | Out-Null
+    }
+
+    Push-Location $RootSourceDir
+    
+    try
+    {
+        $argString = "a `"$OutFile`" $includePattern"
+
+        if($ExcludePattern)
+        {
+            $argString += " -x!$ExcludePattern"
+        }
+
+        $processOptions = @{
+            FilePath = $7zip
+            NoNewWindow = $true
+            UseNewEnvironment = $true
+            PassThru = $true
+            Wait = $true
+            ArgumentList = $argString
+        }
+
+        Write-Warning("Aborting powershell does NOT stop 7zip. You have to kill the 7zip process instead.")
+        $process = Start-Process @processOptions
+        if ($process.ExitCode -ne 0)
+        {
+            Remove-Item -Force $OutFile | Out-Null
+            throw "7zip failed with exit code '$($process.ExitCode)'."
+        }
+
+    } finally {
+        Pop-Location
+    }
+
+}
+```
+
 
