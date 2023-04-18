@@ -432,4 +432,15 @@ function Compress-7Zip(
 }
 ```
 
+Aliases in powershell
+============================
+* Open Powershell, type `notepad $PROFILE`
+* Add a function (New-Alias) won't work for parameters
+```ps1
+function kubectl { 
+  minikube kubectl -- @args
+}
+```
+* Note: @args splats the arguments, do not declare them in the parameter list, as this will introduces issues.
+* Restart powershell session.
 
