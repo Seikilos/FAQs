@@ -452,26 +452,25 @@ Run powershell code in scheduled task that deletes itself
 *Hint 2*: The Script Block after `-Command` must use the ampersand `&`!
 
 ```powershell
-$jobName = "Some Job"
+$jobName = "Reboot"
 $pathToPowershell = "$PSHome\powershell.exe"
-                   
+
 $run = (Get-Date).AddMinutes(1)
 Register-ScheduledTask -TaskName "$jobName" -InputObject (
-    (
-    New-ScheduledTask -Action (
-        New-ScheduledTaskAction -Execute "$pathToPowershell" -Argument (
-        "-Command &{" +
-        "`$agentListenerProcesses = get-process | Where-Object {`$_.Name -eq 'Agent.Listener'}; " +
-        "Stop-Process `$agentListenerProcesses -Force" +
-        "}"
-        )
-    ) -Trigger (
-        New-ScheduledTaskTrigger -Once -At ($run.TimeOfDay.ToString("hh\:mm")) # As a "TimeOfDay" to get 24Hr format
-    ) -Settings (
-        New-ScheduledTaskSettingsSet  -DeleteExpiredTaskAfter 00:00:01 # Delete one second after trigger expires
-    ) 
-    ) | %{ $_.Triggers[0].EndBoundary = $run.AddMinutes(1).ToString('s') ; $_ } # Run through a pipe to set the end boundary of the trigger
+  (
+	New-ScheduledTask -Action (
+	  New-ScheduledTaskAction -Execute "$pathToPowershell" -Argument (
+		"-Command &{" + 
+		". shutdown /g /t 10 /f /c \""'Reboot pending' detected\"" /d p:2:3"+
+		"}"
+	  )
+	) -Trigger (
+	  New-ScheduledTaskTrigger -Once -At ($run.TimeOfDay.ToString("hh\:mm")) # As a "TimeOfDay" to get 24Hr format
+	) -Settings (
+	  New-ScheduledTaskSettingsSet  -DeleteExpiredTaskAfter 00:00:01 # Delete one second after trigger expires
+	) 
+  ) | %{ $_.Triggers[0].EndBoundary = $run.AddMinutes(2).ToString('s') ; $_ } # Run through a pipe to set the end boundary of the trigger
 )
-            
+
 Get-ScheduledTask | Where {$_.TaskName.Contains($jobName)}
 ```
