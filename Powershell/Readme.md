@@ -444,3 +444,34 @@ function kubectl {
 * Note: @args splats the arguments, do not declare them in the parameter list, as this will introduces issues.
 * Restart powershell session.
 
+
+Run powershell code in scheduled task that deletes itself
+============================
+*Hint*: Use `-noexit` Parameter during tests to prevent closing the powershell window
+
+*Hint 2*: The Script Block after `-Command` must use the ampersand `&`!
+
+```powershell
+$jobName = "Some Job"
+$pathToPowershell = "$PSHome\powershell.exe"
+                   
+$run = (Get-Date).AddMinutes(1)
+Register-ScheduledTask -TaskName "$jobName" -InputObject (
+    (
+    New-ScheduledTask -Action (
+        New-ScheduledTaskAction -Execute "$pathToPowershell" -Argument (
+        "-Command &{" +
+        "`$agentListenerProcesses = get-process | Where-Object {`$_.Name -eq 'Agent.Listener'}; " +
+        "Stop-Process `$agentListenerProcesses -Force" +
+        "}"
+        )
+    ) -Trigger (
+        New-ScheduledTaskTrigger -Once -At ($run.TimeOfDay.ToString("hh\:mm")) # As a "TimeOfDay" to get 24Hr format
+    ) -Settings (
+        New-ScheduledTaskSettingsSet  -DeleteExpiredTaskAfter 00:00:01 # Delete one second after trigger expires
+    ) 
+    ) | %{ $_.Triggers[0].EndBoundary = $run.AddMinutes(1).ToString('s') ; $_ } # Run through a pipe to set the end boundary of the trigger
+)
+            
+Get-ScheduledTask | Where {$_.TaskName.Contains($jobName)}
+```
