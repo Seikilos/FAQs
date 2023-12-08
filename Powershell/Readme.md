@@ -474,3 +474,14 @@ Register-ScheduledTask -TaskName "$jobName" -InputObject (
 
 Get-ScheduledTask | Where {$_.TaskName.Contains($jobName)}
 ```
+
+
+Encoding, Umlauts, etc
+================================
+If your powershell file does not use proper encoding, this will break:
+```ps1
+Write-Host("öäü");
+# > Ã¶Ã¤Ã¼
+```
+
+Solution: Ensure the ps1 file has `UTF8 with BOM` encoding.
