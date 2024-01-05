@@ -177,3 +177,9 @@ If you are unsure, create a c++ console application that is using the code in qu
    
 
 Now you have the string
+
+Enable user mode dumps (WER)
+====================================
+https://learn.microsoft.com/en-us/windows/win32/wer/collecting-user-mode-dumps
+
+Various options in `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps` are required.
