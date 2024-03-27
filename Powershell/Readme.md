@@ -485,3 +485,36 @@ Write-Host("öäü");
 ```
 
 Solution: Ensure the ps1 file has `UTF8 with BOM` encoding.
+
+
+Autologin
+================================
+For whatever reason: Getting sysinternals autologon.exe to work via command line never succeeded for me. The necessary registry keys were never written, compared to manually interacting with the GUI.
+This powershell script seems to work:
+
+```ps1
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
+
+function SetOrUpdateRegistryPath($path, $key, $value){
+	Write-Host("Checking '$path' with key '$key'")
+	
+	$foundMatch = Get-ItemProperty -Path $path -Name $key -ErrorAction SilentlyContinue
+	if($foundMatch) {
+		Write-Host("Key exists, updating")
+		Set-ItemProperty -Path $path -Name $key -Value $value
+	} else {
+		Write-Host("Creating key")
+		New-ItemProperty -Path $path -Name $key -Value $value
+	}
+}
+
+SetOrUpdateRegistryPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" "DefaultUserName" "ESC_DevOps_CLA"
+
+SetOrUpdateRegistryPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" "DefaultDomainName" "local-windows-ba-109"
+
+SetOrUpdateRegistryPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" "AutoAdminLogon" "1"
+
+```
+
+
