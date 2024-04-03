@@ -517,4 +517,11 @@ SetOrUpdateRegistryPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows
 
 ```
 
+Create large file
+================================
+Create empty 10GB files.Note: Will be empty file, that is very compressable but will require the requested size on disk.
+
+```ps1
+fsutil file createnew emergency.buffer (1024*1024*1024*10) #=10GB
+```
 
