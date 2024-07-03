@@ -220,13 +220,18 @@ Get-Content -Encoding "UTF8" $file | Select-Object @{ n='line';e={$_}}, @{n='mat
 
 Select statement similar to LINQ Select
 ================
-Use `Select-Object` with `-ExpandProperty` to remove the Property name.
+Use `Select-Object` with `-ExpandProperty` to remove the Property name for simple properties, use `ForEach-Object` instead for composites.
 
 ```powershell
 $list | Select-Object Fullname # Creates a list, when dumped to string, having a leading "Fullname" in the output
 
 $list | Select-Object -ExpandProperty Fullname # fixes this
+
+# For composites you cannot use ExpandProperty, use ForEach-Object
+$list | ForEach-Object {"/foo/"+$_}
 ```
+
+
 
 Credentials
 ===========
