@@ -6,6 +6,8 @@ Tested with Chrome and Firefox
 
 Just paste into browsers console window, then your clipboard has the data
 
+**Caveat:** Limited use: This won't work on `navigation` and other properties, that deeply hide their attributes (e.g. non enumerable + inherited)
+
 ```js
  function copyWithCircularRefs(input) {
   const getCircularReplacer = () => {
