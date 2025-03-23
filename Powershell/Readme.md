@@ -89,6 +89,8 @@ Error handling
 
 Edit: As of now the entire handling errors is a mess in ps. A trap does properly work, even if calling a script from within a script. But if the result of the script is stored in a variable, all output is redirected to it. You will get an exit code 1 but not the message causing the problem.
 
+Update: `$ErrorView = 'NormalView'` has been added because currently exceptions in psm1 are displayed without stacktrace. Which makes debugging hard.
+
 Use trap command to catch all exceptions (https://technet.microsoft.com/en-us/library/hh847742.aspx)
 
 **Important**: The following code does **not** work for Win 7 and PS Version 3 when dealing with syntax errors. However it seems to [work](http://stackoverflow.com/questions/40507389/cannot-catch-or-trap-syntax-error?noredirect=1#comment68266103_40507389) on Win 10 PS 5.1 
@@ -97,6 +99,7 @@ Example: (Place on top):
 
 ```powershell
 $ErrorActionPreference = "stop"
+$ErrorView = "NormalView"
 trap [Exception] {
 	echo "Trap encountered. Exiting with 1. See errors below"
 	$t = $host.ui.RawUI.ForegroundColor
