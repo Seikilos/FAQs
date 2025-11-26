@@ -533,3 +533,8 @@ Create empty 10GB files.Note: Will be empty file, that is very compressable but 
 fsutil file createnew emergency.buffer (1024*1024*1024*10) #=10GB
 ```
 
+One-line to list folder sizes
+==============================
+In `pwsh` navigate to the root folder of interest.
+
+`Get-ChildItem -Directory | ForEach-Object {"{0:N2} GB - {1}" -f ((Get-ChildItem $_ -Recurse | Measure-Object Length -Sum).Sum / 1GB), $_.Name}`
