@@ -538,3 +538,8 @@ One-line to list folder sizes
 In `pwsh` navigate to the root folder of interest.
 
 `Get-ChildItem -Directory | ForEach-Object {"{0:N2} GB - {1}" -f ((Get-ChildItem $_ -Recurse | Measure-Object Length -Sum).Sum / 1GB), $_.Name}`
+
+
+Read tail of a file
+==============================
+`Get-Content -Path "file.txt" -Wait -Tail 10`
