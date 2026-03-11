@@ -543,3 +543,8 @@ In `pwsh` navigate to the root folder of interest.
 Read tail of a file
 ==============================
 `Get-Content -Path "file.txt" -Wait -Tail 10`
+
+List top 20 CPU consumers
+=============================
+`Get-Process | Sort-Object CPU -Descending | Select-Object -First 20 Name, Id, CPU, WorkingSet64`
+
