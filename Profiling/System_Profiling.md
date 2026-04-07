@@ -4,11 +4,16 @@
 
 Run during the workload to classify the bottleneck (CPU, disk, or wait):
 
-```cmd
-typeperf "\PhysicalDisk(*)\Avg. Disk sec/Read" "\PhysicalDisk(*)\Avg. Disk sec/Write" ^
-         "\PhysicalDisk(*)\Disk Transfers/sec" "\PhysicalDisk(*)\Current Disk Queue Length" ^
-         "\Processor(_Total)\%% Processor Time" "\System\Processes" ^
-         "\System\Context Switches/sec" -si 2 -sc 45 -o C:\Temp\triage.csv
+```powershell
+typeperf `
+    "\PhysicalDisk(*)\Avg. Disk sec/Read" `
+    "\PhysicalDisk(*)\Avg. Disk sec/Write" `
+    "\PhysicalDisk(*)\Disk Transfers/sec" `
+    "\PhysicalDisk(*)\Current Disk Queue Length" `
+    "\Processor(_Total)\% Processor Time" `
+    "\System\Processes" `
+    "\System\Context Switches/sec" `
+    -si 2 -sc 45 -o C:\Temp\triage.csv
 ```
 
 **Interpretation:**
@@ -20,27 +25,27 @@ typeperf "\PhysicalDisk(*)\Avg. Disk sec/Read" "\PhysicalDisk(*)\Avg. Disk sec/W
 
 ## Step 2: Capture ETW Trace
 
-```cmd
-mkdir C:\Temp 2>nul
+```powershell
+New-Item -ItemType Directory -Path C:\Temp -Force | Out-Null
 
-xperf -on PROC_THREAD+LOADER+PROFILE+CSWITCH+DISPATCHER+DISK_IO+DISK_IO_INIT+FILE_IO+FILE_IO_INIT+FILENAME+HARD_FAULTS+NETWORKTRACE ^
-  -stackwalk Profile+CSwitch+ReadyThread+ProcessCreate+ProcessDelete+DiskReadInit+FileCreate+FileRead+FileWrite ^
-  -BufferSize 1024 -MinBuffers 256 -MaxBuffers 512 ^
-  -f C:\Temp\kernel.etl
+xperf -on PROC_THREAD+LOADER+PROFILE+CSWITCH+DISPATCHER+DISK_IO+DISK_IO_INIT+FILE_IO+FILE_IO_INIT+FILENAME+HARD_FAULTS+NETWORKTRACE `
+    -stackwalk Profile+CSwitch+ReadyThread+ProcessCreate+ProcessDelete+DiskReadInit+FileCreate+FileRead+FileWrite `
+    -BufferSize 1024 -MinBuffers 256 -MaxBuffers 512 `
+    -f C:\Temp\kernel.etl
 ```
 
 For long sessions (>10 min), add circular buffering:
 
-```cmd
-xperf -on PROC_THREAD+LOADER+PROFILE+CSWITCH+DISPATCHER+DISK_IO+DISK_IO_INIT+FILE_IO+FILE_IO_INIT+FILENAME+HARD_FAULTS+NETWORKTRACE ^
-  -stackwalk Profile+CSwitch+ReadyThread+ProcessCreate+ProcessDelete+DiskReadInit+FileCreate+FileRead+FileWrite ^
-  -BufferSize 1024 -MaxBuffers 1024 -MaxFile 2048 -FileMode Circular ^
-  -f C:\Temp\kernel.etl
+```powershell
+xperf -on PROC_THREAD+LOADER+PROFILE+CSWITCH+DISPATCHER+DISK_IO+DISK_IO_INIT+FILE_IO+FILE_IO_INIT+FILENAME+HARD_FAULTS+NETWORKTRACE `
+    -stackwalk Profile+CSwitch+ReadyThread+ProcessCreate+ProcessDelete+DiskReadInit+FileCreate+FileRead+FileWrite `
+    -BufferSize 1024 -MaxBuffers 1024 -MaxFile 2048 -FileMode Circular `
+    -f C:\Temp\kernel.etl
 ```
 
 ## Step 3: Capture Network Events (Optional)
 
-```cmd
+```powershell
 logman create trace "NetworkTrace" -o C:\Temp\network.etl -bs 256 -nb 128 256 -ets
 logman update trace "NetworkTrace" -p "Microsoft-Windows-TCPIP" 0xFFFFFFFF 4 -ets
 logman update trace "NetworkTrace" -p "Microsoft-Windows-Winsock-AFD" 0xFFFFFFFF 4 -ets
@@ -51,7 +56,7 @@ logman update trace "NetworkTrace" -p "Microsoft-Windows-DNS-Client" 0xFFFFFFFF 
 
 Let traces run for 2–3 minutes (enough to capture several process cycles), then:
 
-```cmd
+```powershell
 logman stop "NetworkTrace" -ets
 xperf -d C:\Temp\merged.etl
 ```
@@ -104,7 +109,14 @@ Open **Storage → Disk Usage**. Key columns: `Process`, `IO Type`, `Disk Servic
 
 Use targeted tools to confirm the bottleneck identified by ETW:
 
-- **DNS issues:** `wevtutil sl Microsoft-Windows-DNS-Client/Operational /e:true` then inspect logs
+- **DNS issues:**
+
+  ```powershell
+  wevtutil sl Microsoft-Windows-DNS-Client/Operational /e:true
+  ```
+
+  Then inspect logs.
+
 - **Network waits:** Process Monitor filtered to TCP traffic for the target process
 - **Disk waits:** `diskspd` to benchmark raw disk performance
 - **Process creation overhead:** Measure spawn cost with a loop test
