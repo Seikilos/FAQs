@@ -23,6 +23,28 @@ typeperf `
 - Context switches >50,000/sec with fluctuating process count → process creation overhead
 - All metrics moderate → blocking wait (network, license server, timer)
 
+## Step 1: Optional run typeperf during entire run
+
+You can gather data until CTRL+C with
+
+```powershell
+C:\Users\azureuser> typeperf `
+   "\PhysicalDisk(0 C:)\Avg. Disk sec/Read" `
+   "\PhysicalDisk(0 C:)\Avg. Disk sec/Write" `
+   "\PhysicalDisk(_Total)\Disk Transfers/sec" `
+   "\PhysicalDisk(_Total)\Current Disk Queue Length" `
+   "\Processor(_Total)\% Processor Time" `
+   "\Memory\Available MBytes" `
+   "\Memory\Pages/sec" `
+   "\Paging File(_Total)\% Usage" `
+   "\Process(<<<YOUR_PROCESS>>>)\% Processor Time" `
+   "\Process(<<<YOUR_PROCESS>>>)\Working Set" `
+   "\System\Context Switches/sec" `
+   -si 5 -o C:\temp\long_running.csv
+```
+
+This let you visualize a process explorer type of timeseries
+
 ## Step 2: Capture ETW Trace
 
 ```powershell
