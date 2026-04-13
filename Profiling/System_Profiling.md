@@ -47,6 +47,12 @@ This let you visualize a process explorer type of timeseries
 
 ## Step 2: Capture ETW Trace
 
+Get xperf first (WPR is not that CLI friendly and requires a profile)
+
+ * Download adksetup: https://go.microsoft.com/fwlink/?linkid=2289980
+ * Install xperf only: `Start-Process -FilePath .\adksetup.exe -ArgumentList '/quiet /norestart /ceip off /features OptionId.WindowsPerformanceToolkit' -Wait -PassThru`
+
+
 ```powershell
 New-Item -ItemType Directory -Path C:\Temp -Force | Out-Null
 
