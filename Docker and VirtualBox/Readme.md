@@ -69,3 +69,31 @@ PS C:\Program Files\Oracle\VirtualBox> ./VBoxManage.exe startvm "VM Name" -type 
 * Run container (Important: network host for simplicity) `docker run -it --rm --network=host -e DISPLAY=localhost:0 x11-test xeyes`
 * => Should display xeyey from the docker container
 * You might need call `docker kill x11-test`
+
+# Clean up docker images
+
+Check size
+```
+docker system df
+docker system df -v
+```
+
+Clean up (from least destructive to very destructive)
+
+```
+# Build cache
+docker builder prune
+docker builder prune --filter until=168h    # older than 7 days
+
+# dangling images, none:none layers
+docker image prune
+
+# stopped containers
+docker container prune
+
+# all unused images
+docker image prune -a
+
+# Very careful, deletes volumes
+docker volume prune
+```
