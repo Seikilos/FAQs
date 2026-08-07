@@ -83,7 +83,8 @@ Clean up (from least destructive to very destructive)
 ```
 # Build cache
 docker builder prune --filter until=168h    # older than 7 days
-docker builder prune                        # removes all cache, not helpful, if you are building images right now
+docker builder prune                        # removes all dangling cache (unreferenced)
+docker builder prune -af                    # all unused build cache (also referenced) - not helpful, if you are building images right now
 
 # dangling images, none:none layers
 docker image prune
